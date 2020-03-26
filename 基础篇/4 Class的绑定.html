@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>计算属性、侦听器、方法</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+        <style>
+        p{
+            transition: 1s all;
+            font-size: 40px;
+        }
+        .fontRed{
+            color:#990000;
+        }
+        .fontBlue{
+            color:#000099;
+        }
+        .fontGreen{
+            color:#009900;
+        }
+        .fontBold{
+            font-weight: bold;
+        }
+        .fontUnderline{
+            text-decoration: underline;
+        }
+        </style>
+    </head>
+    <body>
+        <div id="app">
+            <!-- 直接内联绑定style -->
+            <p v-bind:style="fontRed" v-on:click="fontRedToBlue">{{msg}}</p>
+            <p v-bind:class="{fontGreen:booleanFontGreen}" v-on:click="switchColor">{{msg}}</p>
+            <p v-bind:class="classFontGreen">{{msg}}</p>
+        </div>
+    </body>
+    <script>
+        let app = new Vue({
+            el:"#app",
+            data:function(){
+                return {
+                    booleanFontGreen:true,
+                    classFontGreen:{fontBlue:true,fontBold:true},
+                    fontUnderline:{fontUnderline:true},
+                    fontRed:{color:'red','font-weight':'bold'},
+                    msg:"Hello world",
+                    msgmsg:"随着msg变化而变化"
+                } 
+            },
+            methods:{
+                fontRedToBlue:function(){
+                    if(this.fontRed.color == "red"){
+                        this.fontRed.color = 'blue'
+                    }else{
+                        this.fontRed.color = 'red'
+                    }    
+                },
+                switchColor:function(){
+                    this.classFontGreen = !this.classFontGreen;
+                }
+            }
+        });
+    </script>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>322
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>计算属性、侦听器、方法</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+    </head>
+    <body>
+        <div id="app">
+            <p>{{msg}}</p>
+            <p>computed:{{reversemsg}}</p>
+            <p>methods:{{Mreversemsg()}}</p>
+            <p>watch:{{msgmsg}}</p>
+        </div>
+    </body>
+    <script>
+        let app = new Vue({
+            el:"#app",
+            data:function(){
+                return {
+                    msg:"Hello world",
+                    msgmsg:"随着msg变化而变化"
+                } 
+            },
+            //计算属性(本质上是属性)
+            computed: {
+                reversemsg:function(){
+                    return this.msg.split('').reverse().join('');
+                }
+            },
+            //方法(本质上是函数)
+            methods:{
+                Mreversemsg:function(){
+                    return this.msg.split('').reverse().join('');
+                }
+            },
+            //侦听器(用于修改data属性)
+            watch:{
+                msg:function(val){
+                    this.msgmsg = val + val;
+                }
+            }
+        })
+    </script>
+</html>

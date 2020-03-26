@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>计算属性、侦听器、方法</title>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.6.11"></script>
+        <style>
+        p{
+            transition: 1s all;
+            font-size: 40px;
+        }
+        .fontRed{
+            color:#990000;
+        }
+        .fontBlue{
+            color:#000099;
+        }
+        .fontGreen{
+            color:#009900;
+        }
+        .fontBold{
+            font-weight: bold;
+        }
+        .fontUnderline{
+            text-decoration: underline;
+        }
+        </style>
+    </head>
+    <body>
+        <div id="app">
+            <!-- 直接内联绑定style -->
+            <p>obj</p>
+            <ul>
+                <li v-for="item in obj">{{item}}</li>
+            </ul>
+            <p>arr</p>
+            <ul>
+                <li v-for="item in arr">{{item}}</li>
+            </ul>
+            <p>objarr</p>
+            <ul v-for="item in objarr">
+                <li v-for="value in item">{{value}}</li>
+            </ul>
+            <p>arrobj</p>
+            <ul>
+                <li>{{arrobj.name}}</li>
+                <li>{{arrobj.age}}</li>
+                <li v-for="(item,index) in arrobj.work">{{index+1}}:{{item}}</li>
+            </ul>
+        </div>
+    </body>
+    <script>
+        let app = new Vue({
+            el:"#app",
+            data:function(){
+                return {
+                    obj:{
+                        name:'张三',
+                        age:15,
+                        work:'法外狂徒'
+                    },
+                    arr:['磊仔','里脊羊','龙龙','璐总'],
+                    objarr:[
+                        {
+                            name:'谢磊',
+                            age:18,
+                            work:'实习工程师'
+                        },
+                        {
+                            name:'张桂福',
+                            age:19,
+                            work:'后端工程师'
+                        },
+                        {
+                            name:'丁浩东',
+                            age:20,
+                            work:'技术总监'
+                        },
+                        {
+                            name:'许致中',
+                            age:21,
+                            work:'首席技术官'
+                        }
+                    ],
+                    arrobj:{
+                        name:'陈寅初',
+                        age:22,
+                        work:['实习工程师','前端工程师','首席执行官','监事会']
+                    }
+                }
+            },
+            methods:{
+                fontRedToBlue:function(){
+                    if(this.fontRed.color == "red"){
+                        this.fontRed.color = 'blue'
+                    }else{
+                        this.fontRed.color = 'red'
+                    }    
+                },
+                switchColor:function(){
+                    this.classFontGreen = !this.classFontGreen;
+                }
+            }
+        });
+    </script>
+</html>
